@@ -21,7 +21,19 @@ const hospitalSchema = new Schema({
             required: true,
             default: 1.27
         }
-    }
+    },
+    orders: [
+        {
+            madeBy: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            order: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Order'
+            },
+        }
+    ]
 })
 
 module.exports = mongoose.model('Hospital', hospitalSchema);

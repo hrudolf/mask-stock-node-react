@@ -5,7 +5,7 @@ require('dotenv').config();
 const port = process.env.PORT;
 const morgan = require('morgan');
 const apiRoutes = require("./routes/api")
-
+const User = require("./models/UserModel")
 
 //middleware
 //receive JSON
@@ -19,7 +19,43 @@ app.get('/', (req, res) => {
     res.status(200).send('Server is live');
 })
 
+app.post('/register', async (req, res) => {
+    const { name, username, password, hospitals } = req.body;
+    try {
+        const user = await User.signup(name, username, password, hospitals);
+        res.status(200).json(user);
+    } catch (error) {
+        return res.status(400).json({ error: error.message })
+    }
+})
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        //TODO: CHECK TOKEN / TOKENLOGIN??
+        const user = await User.login(username, password);
+        //TODO: Add Token
+        res.status(200).json(user);
+    } catch (error) {
+        return res.status(400).json({ error: error.message })
+    }
+})
+
+//ADD TOKEN CHECKING FROM THIS POINT
+
 app.use('/api/', apiRoutes);
+
+app.patch('/updateuser/:id', async (req, res) => {
+    const id = req.params.id;
+    const { name, username, password, hospitals } = req.body;
+    try {
+        const user = await User.findAndUpdate({id, name, username, password, hospitals});
+        //TODO: Add Token
+        res.status(200).json(user);
+    } catch (error) {
+        return res.status(400).json({ error: error.message })
+    }
+})
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {
