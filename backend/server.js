@@ -4,6 +4,7 @@ const app = express();
 require('dotenv').config();
 const port = process.env.PORT;
 const morgan = require('morgan');
+const apiRoutes = require("./routes/api")
 
 
 //middleware
@@ -18,7 +19,9 @@ app.get('/', (req, res) => {
     res.status(200).send('Server is live');
 })
 
-mongoose.connect(process.env.MONGOOSE_URL)
+app.use('/api/', apiRoutes);
+
+mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         console.log('Database connected');
 
