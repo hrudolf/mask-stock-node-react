@@ -1,0 +1,12 @@
+[
+    {
+        "item": "FFP2 Mask",
+        "quantity": 5000,
+        "sellPrice": 500
+    },
+    {
+        "item": "KN95 Mask",
+        "quantity": 5000,
+        "sellPrice": 450
+    }
+]

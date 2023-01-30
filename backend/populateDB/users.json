@@ -1,0 +1,30 @@
+[
+    {
+        "username": "house",
+        "name": "Dr House"
+    },
+    {
+        "username": "carter",
+        "name": "John Carter"
+    },
+    {
+        "username": "dolittle",
+        "name": "Dr DoLittle"
+    },
+    {
+        "username": "adams",
+        "name": "Patch Adams"
+    },
+    {
+        "username": "frankeinstein",
+        "name": "Dr. Frederick Frankenstein"
+    },
+    {
+        "username": "scully",
+        "name": "Dr. Dana Scully"
+    },
+    {
+        "username": "connors",
+        "name": "Dr. Curt Connors"
+    }
+]

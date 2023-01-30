@@ -1,0 +1,132 @@
+[
+    {
+        "name": "Pécsi Irgalmasrendi Kórház",
+        "address": {
+            "country": "Magyarország",
+            "city": "Pécs",
+            "postCode": "7621",
+            "street": "Széchenyi tér 5."
+        },
+        "VAT": {
+            "number": "18330247202",
+            "rate": 1.27
+        }
+    },
+    {
+        "name": "Miskolci Semmelweis Ignác Egészségügyi Központ és Egyetemi Oktatókórház",
+        "address": {
+            "country": "Magyarország",
+            "city": "Miskolc",
+            "postCode": "3529",
+            "street": "Csabai kapu 9-11"
+        },
+        "VAT": {
+            "number": "14635306205",
+            "rate": 1.27
+        }
+    },
+    {
+        "name": "Szent Pantaleon Kórház Kht.",
+        "address": {
+            "country": "Magyarország",
+            "city": "Dunaújváros",
+            "postCode": "2400",
+            "street": "Korányi S. u 4-6"
+        },
+        "VAT": {
+            "number": "15791942207",
+            "rate": 1.27
+        }
+    },
+    {
+        "name": "Markhot Ferenc Oktatókórház és Rendelőintézet",
+        "address": {
+            "country": "Magyarország",
+            "city": "Eger",
+            "postCode": "3300",
+            "street": "Knézich Károly u. 1"
+        },
+        "VAT": {
+            "number": "15813839-2-10",
+            "rate": 1.27
+        }
+    },
+    {
+        "name": "Fővárosi Önkormányzat Heim Pál Gyermekkórház",
+        "address": {
+            "country": "Magyarország",
+            "city": "Budapest",
+            "postCode": "1089",
+            "street": "Üllői út 86"
+        },
+        "VAT": {
+            "number": "19650397-1-42",
+            "rate": 1.27
+        }
+    },
+    {
+        "name": "The Helios Hospital Berlin-Buch",
+        "address": {
+            "country": "Germany",
+            "city": "Berlin-Buch",
+            "postCode": "13125",
+            "street": "Schwanebecker Chaussee 50"
+        },
+        "VAT": {
+            "number": "DE291053519",
+            "rate": 1.00
+        }
+    },
+    {
+        "name": "The University Hospital Duesseldorf",
+        "address": {
+            "country": "Germany",
+            "city": "Duesseldorf",
+            "postCode": "40225",
+            "street": "Moorenstr. 5"
+        },
+        "VAT": {
+            "number": "DE119432190",
+            "rate": 1.00
+        }
+    },
+    {
+        "name": "The University Hospital of Ludwig Maximilian University of Munich",
+        "address": {
+            "country": "Germany",
+            "city": "München",
+            "postCode": "80539",
+            "street": "Geschwister-Schnoll-Platz 1"
+        },
+        "VAT": {
+            "number": "DE811205325",
+            "rate": 1.00
+        }
+    },
+    {
+        "name": "Rigas Austrumu Kliniskas Universitates",
+        "address": {
+            "country": "Latvia",
+            "city": "Riga",
+            "postCode": "1079",
+            "street": "Hipokrata iela 2"
+        },
+        "VAT": {
+            "number": "Not yet found",
+            "rate": 1.00
+        }
+    },
+    {
+        "name": "Karolinska University Hospital",
+        "address": {
+            "country": "Sweden",
+            "city": "Solna",
+            "postCode": "17164",
+            "street": "Karolinska Vägen 22"
+        },
+        "VAT": {
+            "number": "Not yet found",
+            "rate": 1.00
+        }
+    }
+]
