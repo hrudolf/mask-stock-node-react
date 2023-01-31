@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home user={loggedUser} />}></Route>
         {/* {/* <Route path="/login" element={<Login user={loggedUser} />}></Route> */}
-        <Route path="/register" element={<Register />}></Route> */}
+        <Route path="/register" element={<Register />}></Route> */
       </Routes>
     </div>
   );

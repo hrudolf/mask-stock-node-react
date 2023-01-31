@@ -2,17 +2,18 @@
 
 ### Install dependencies
 ```bash
-cd ./server
+cd ./backend
 npm install
+npm install --save-dev nodemon
 ```
 
 ### .env file
-Copy the .env.sample as .env and fill up the environment variable for your personal mongodb connecttion url.
+Copy the .env.sample as .env and fill up the environment variable for your personal mongodb connection url.
 
 ### Prepare the database
 
 ```bash
-cd ./server
+cd ./backend
 npm run populate
 ```
 
@@ -21,4 +22,10 @@ npm run populate
 You can run tests with "REST Client" extension. You should update the ids in the requests, see comments there.
 
 
-### Nothing on Frontend yet
+### Frontend
+```bash
+cd ..
+cd ./frontend
+npm i
+npm run start
+```
