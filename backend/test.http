@@ -5,8 +5,8 @@ POST http://localhost:3015/register
 Content-Type:  application/json
 
 {
-    "name": "Doctor House",
-    "username": "AwesomeUser",
+    "name": "Doctor House5",
+    "username": "AwesomeUser7",
     "password": "abcABC123!"
 }
 
@@ -15,7 +15,7 @@ POST http://localhost:3015/login
 Content-Type:  application/json
 
 {
-    "username": "AwesomeUser",
+    "username": "AwesomeUser7",
     "password": "abcABC123!"
 }
 
@@ -28,16 +28,11 @@ GET http://localhost:3015/api/hospitals
 ###
 //You have to update the User ID up in the link, and below the hospital IDs
 //You can get the IDs from the two GET requests above!
-PATCH http://localhost:3015/updateuser/63d81d6668ca1d35a1f81277
+PATCH http://localhost:3015/updateuser/63d7de20e22bca2c9ef5b25b
 Content-Type:  application/json
 
 {
-    "name": "Doctor House3",
-    "username": "AwesomeUser008",
-    "hospitals": [
-        "63d7de20e22bca2c9ef5b242",
-        "63d7de20e22bca2c9ef5b24a"
-    ]
+    "password": "abcABC123!"
 }
 
 ###
@@ -56,12 +51,17 @@ POST http://localhost:3015/api/order
 Content-Type:  application/json
 
 {
-    "user": "63d81d6668ca1d35a1f81277",
-    "hospital": "63d7de20e22bca2c9ef5b242",
+    "user": "63d7de20e22bca2c9ef5b25d",
+    "hospital": "63d7de20e22bca2c9ef5b243",
     "goods": [
         {
-            "item": "63d7de20e22bca2c9ef5b257",
-            "quantity": 50
+            "item": "63d7de20e22bca2c9ef5b258",
+            "quantity": 100
         }
     ]
 }
+
+###
+GET http://localhost:3015/api/order
+//You need to update user, hospital and item ID
+//you can get the IDs from the 3 get requests above!

@@ -40,12 +40,24 @@ router.get('/stock', async (req, res) => {
     }
 });
 
+router.get('/order', async (req, res) => {
+    try {
+        const order = await OrderModel.find().populate({ path: "user", select: ["name"] }).populate({ path: "hospital", select: ["name"] });
+
+        res.status(200).json({ order })
+
+    } catch (error) {
+        res.status(500).json({ error: error })
+    }
+    //TODO NEED TO ADD BILLINGO INVOICE
+})
+
 router.post('/order', async (req, res) => {
     const { user, hospital, goods } = req.body;
     try {
-        const stock = await OrderModel.addOrder({ user, hospital, goods });
+        const order = await OrderModel.addOrder({ user, hospital, goods });
 
-        res.status(200).json({ stock })
+        res.status(200).json({ order })
 
     } catch (error) {
         res.status(500).json({ error: error })
