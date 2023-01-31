@@ -16,7 +16,9 @@ cd ./server
 npm run populate
 ```
 
-**populate command** will run the populate.js file as a script and it will generate a buch of starter data for your database. 
+**populate command** will run the populate.js file as a script and it will generate a bunch of starter data for your database. 
+
+You can run tests with "REST Client" extension. You should update the ids in the requests, see comments there.
 
 
 ### Nothing on Frontend yet
