@@ -1,0 +1,51 @@
+GET http://localhost:3015/api/hospitals
+
+###
+POST http://localhost:3015/register
+Content-Type:  application/json
+
+{
+    "name": "Doctor House",
+    "username": "AwesomeUser",
+    "password": "abcABC123!"
+}
+
+###
+POST http://localhost:3015/login
+Content-Type:  application/json
+
+{
+    "username": "AwesomeUser",
+    "password": "abcABC123!"
+}
+
+###
+//You have to update the User ID up in the link, and below the hospital IDs
+PATCH http://localhost:3015/updateuser/63d81d6668ca1d35a1f81277
+Content-Type:  application/json
+
+{
+    "name": "Doctor House3",
+    "username": "AwesomeUser008",
+    "hospitals": [
+        "63d7de20e22bca2c9ef5b242",
+        "63d7de20e22bca2c9ef5b24a"
+    ]
+}
+
+
+###
+POST http://localhost:3015/api/order
+//You need to update user, pospital and item ID
+Content-Type:  application/json
+
+{
+    "user": "63d81d6668ca1d35a1f81277",
+    "hospital": "63d7de20e22bca2c9ef5b242",
+    "goods": [
+        {
+            "item": "63d7de20e22bca2c9ef5b257",
+            "quantity": 50
+        }
+    ]
+}
