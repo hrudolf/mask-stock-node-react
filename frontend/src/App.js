@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
-import { Routes, Route, Navigate } from "react-router-dom";
 import UserForm from "./components/UserForm";
 import AdminSite from "./pages/AdminSite";
 import Order from "./pages/Order";
@@ -17,7 +16,7 @@ function App() {
     _id: "63d92641502713d5846282fe",
     name: "Doctor House",
     username: "house",
-    hospitals: ["63d7de20e22bca2c9ef5b242", "63d7de20e22bca2c9ef5b24a"],
+    hospitals: ["63d92641502713d5846282e5", "63d92641502713d5846282e6"],
     isAdmin: true
   });
 
