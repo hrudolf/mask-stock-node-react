@@ -72,7 +72,7 @@ router.post('/order', async (req, res) => {
         res.status(200).json(order)
 
     } catch (error) {
-        res.status(500).json({ error: error })
+        res.status(500).json({ error: error.message })
     }
     //TODO NEED TO ADD BILLINGO INVOICE
 })

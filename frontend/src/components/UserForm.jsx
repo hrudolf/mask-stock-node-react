@@ -57,7 +57,10 @@ const UserForm = ({ user, setUser }) => {
       setError(json.error);
     }
     else {
-      if (user) setUser({ _id: user._id, ...regContent, hospitals: usersHospitals })
+      if (user) {
+        setUser({ _id: user._id, ...regContent, hospitals: usersHospitals })
+        localStorage.setItem("user", JSON.stringify({ _id: user._id, ...regContent, hospitals: usersHospitals }))
+      }
       setLoading(false);
       user ? setMessage("Profile successfully updated") : setMessage("Successful registration, your profile will be validated by an admin");
     }

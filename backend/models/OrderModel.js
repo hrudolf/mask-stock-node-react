@@ -38,7 +38,6 @@ const orderSchema = new Schema({
 orderSchema.statics.addOrder = async function ({ user, hospital, goods }) {
     //an order can contain multiple items
     //mapping through all items and updating stock quantity for each item in the order
-    console.log(goods);
     const goodsWithPrice = await Promise.all(goods.map(async (good) => {
         const itemInStock = await Stock.findById(good.item);
         //Update stock
