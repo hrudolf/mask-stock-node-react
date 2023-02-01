@@ -5,6 +5,7 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
     return (
         <nav>
             <Link to='/'>Home</Link>
+            <Link to='/order'>Order</Link>
             {!loggedIn &&
                 <>
                     <Link to='/register'>Sign up</Link>
