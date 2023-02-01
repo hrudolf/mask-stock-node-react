@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("https://www.teahub.io/photos/full/175-1758883_medical-background-free-image-background-for-hospital-website.png");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  scroll-behavior: smooth;
+
 }
 
 code {
@@ -14,4 +20,17 @@ code {
 
 nav a {
   padding: 10px;
+}
+
+.HomeText{
+  text-align: center;
+  position: relative;
+  top: 16vh;
+  font-size: 9vw;
+}
+
+.ElonImg{
+  position: fixed;
+  right: -4vh;
+  bottom: 0vh;
 }
