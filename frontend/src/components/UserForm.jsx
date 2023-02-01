@@ -35,7 +35,8 @@ const UserForm = ({ user, setUser }) => {
 
   }, [user]);
 
-  const sendUserData = async () => {
+  const sendUserData = async (e) => {
+    e.preventDefault();
     setLoading(true);
     setError('');
     const url = user ? `/updateuser/${user._id}` : '/register';
@@ -64,7 +65,7 @@ const UserForm = ({ user, setUser }) => {
   return (
     <div>
       {/* We only have a message after successful registration, profile update, so we no longer need the form */}
-      <form className="UserForm">
+      <form className="UserForm" onSubmit={sendUserData}>
         <div className="control">
           <label htmlFor="name">Name:</label>
           <input
@@ -72,6 +73,7 @@ const UserForm = ({ user, setUser }) => {
             name="name"
             id="name"
             value={fullname}
+            required
             onChange={e => setFullname(e.target.value)}
           />
         </div>
@@ -82,6 +84,7 @@ const UserForm = ({ user, setUser }) => {
             type="text"
             name="username"
             id="username"
+            required
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
@@ -104,7 +107,7 @@ const UserForm = ({ user, setUser }) => {
         </div>}
 
         <div className="buttons">
-          <button type="submit" disabled={loading} onClick={sendUserData}>
+          <button type="submit" disabled={loading}>
             {user ? "Update data" : "Register"}
           </button>
 
