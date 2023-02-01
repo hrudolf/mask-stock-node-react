@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import AdminUserList from "../components/AdminUserList";
 
 const AdminSite = () => {
     const [userList, setUserList] = useState();
@@ -35,16 +36,7 @@ const AdminSite = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {userList.map(user => {
-                        return (
-                            <tr key={user._id}>
-                                <td>{user.name}</td>
-                                <td>{user.username}</td>
-                                <td>{user.isVerified ? "true" : "false"}</td>
-                                <td>{user.isAdmin ? "true" : "false"}</td>
-                            </tr>
-                        )
-                    })}
+                    {userList.map(user => <AdminUserList user={user} />)}
                 </tbody>
             </table>}
         </div>
