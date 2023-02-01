@@ -1,20 +1,22 @@
 import { useState } from "react";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import UserForm from "./components/UserForm";
+import AdminSite from "./pages/AdminSite";
 
 function App() {
-/*   const [loggedIn, setLoggedIn] = useState(false);
-  const [loggedUser, setLoggedUser] = useState(''); */
+  /*   const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedUser, setLoggedUser] = useState(''); */
 
-    const [loggedIn, setLoggedIn] = useState(true);
-    const [loggedUser, setLoggedUser] = useState({
-      _id: "63d81d6668ca1d35a1f81277",
-      name: "Doctor House",
-      username: "AwesomeUser008",
-      hospitals: ["63d7de20e22bca2c9ef5b242", "63d7de20e22bca2c9ef5b24a"]
-    });
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedUser, setLoggedUser] = useState({
+    _id: "63d81d6668ca1d35a1f81277",
+    name: "Doctor House",
+    username: "AwesomeUser008",
+    hospitals: ["63d7de20e22bca2c9ef5b242", "63d7de20e22bca2c9ef5b24a"],
+    isAdmin: true
+  });
 
   return (
     <div className="App">
@@ -23,7 +25,8 @@ function App() {
         <Route path="/" element={<Home user={loggedUser} />}></Route>
         {/* {/* <Route path="/login" element={<Login user={loggedUser} />}></Route> */}
         <Route path="/register" element={<UserForm />}></Route>
-        <Route path="/profile" element={<UserForm user={loggedUser} setUser={setLoggedUser}/>}></Route>
+        <Route path="/profile" element={<UserForm user={loggedUser} setUser={setLoggedUser} />}></Route>
+        <Route path="/admin" element={loggedUser.isAdmin ? <AdminSite /> : <Navigate to="/" />}></Route>
       </Routes>
     </div>
   );

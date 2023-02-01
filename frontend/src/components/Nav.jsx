@@ -12,6 +12,7 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
                 </>}
             {loggedIn &&
                 <>
+                    {loggedUser.isAdmin && <Link to='/admin'>Admin</Link>}
                     <span>
                         {`${loggedUser.username}`}
                         <Link to='/profile'>User profile</Link>
