@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import Checkbox from "./Checkbox";
 import "./UserForm.css";
 
 const UserForm = ({ user }) => {
@@ -9,7 +10,8 @@ const UserForm = ({ user }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
-  const [hospitals, setHospitals] = useState('');
+  const [hospitalList, setHospitalList] = useState('');
+  const [usersHospitals, setUsersHospitals] = useState('')
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,15 +19,25 @@ const UserForm = ({ user }) => {
       fetch("/api/hospitals")
         .then(res => res.json())
         .then(json => {
-          setHospitals(json.hospitals)
+          setHospitalList(json)
+        })
+        .catch(err => setError(err.message))
+    }
+    const fetchUser = async () => {
+      fetch(`/api/users/${user._id}`)
+        .then(res => res.json())
+        .then(json => {
+          console.log(json);
+          setFullname(json.name);
+          setUsername(json.username);
+          setUsersHospitals(json.hospitals);
         })
         .catch(err => setError(err.message))
     }
     //If we have a user, we need the list of hospitals, so we fetch it and set it
     if (user) {
       fetchHospitals();
-      setFullname(user.name);
-      setUsername(user.username);
+      fetchUser();
     }
 
   }, [user]);
@@ -33,10 +45,10 @@ const UserForm = ({ user }) => {
   const sendUserData = async () => {
     setLoading(true);
     setError('');
-    const url = user ? `/updateuser/${user.id}` : '/register';
+    const url = user ? `/updateuser/${user._id}` : '/register';
     const fetchMethod = user ? 'PATCH' : 'POST';
     const regContent = password ? { name: fullname, username, password } : { name: fullname, username };
-    const bodyContent = user ? { ...regContent, hospitals } : regContent;
+    const bodyContent = user ? { ...regContent, hospitals: usersHospitals } : regContent;
     const response = await fetch(url, {
       method: fetchMethod,
       headers: {
@@ -93,15 +105,8 @@ const UserForm = ({ user }) => {
           />
         </div>
 
-        {hospitals && <div className="hospitals">
-          {hospitals.map(hospital => {
-            return (
-              <div key={hospital._id}>
-                <input type="checkbox" name={hospital.name} id={hospital._id} checked={false} />
-                <label for={hospital._id}>{hospital.name}</label>
-              </div>
-            )
-          })}
+        {hospitalList && <div className="hospitals">
+          {hospitalList.map(hospital => <Checkbox hospital={hospital} usersHospitals={usersHospitals} setUsersHospitals={setUsersHospitals} key={hospital._id} />)}
         </div>}
 
         <div className="buttons">

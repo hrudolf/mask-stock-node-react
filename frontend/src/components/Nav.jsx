@@ -13,7 +13,8 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
             {loggedIn &&
                 <>
                     <span>
-                        {`${'loggedUser.username'}`}
+                        {`${loggedUser.username}`}
+                        <Link to='/profile'>User profile</Link>
                     </span>
                     <button onClick={() => {
                         setLoggedIn(false);
