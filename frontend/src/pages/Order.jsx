@@ -6,6 +6,7 @@ const Order = ({ user, loggedIn }) => {
     const [chosenHospital, setChosenHospital] = useState(null);
     const [order, setOrder] = useState([]);
     const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
     const handleCheckBox = (hospitalID) => {
         setChosenHospital(hospitalID)
@@ -28,7 +29,8 @@ const Order = ({ user, loggedIn }) => {
 
     const handleSubmit = async () => {
 
-        console.log(order)
+        setError('');
+        setMessage('');
 
         if (chosenHospital && user && order.length > 0) {
             const newOrder = {
@@ -44,15 +46,18 @@ const Order = ({ user, loggedIn }) => {
                 body: JSON.stringify(newOrder)
             })
             const json = await response.json()
-            if (response.ok){
+            if (response.ok) {
                 setMessage('Order succesfully created!')
             } else {
-                console.log(json)
-                setMessage(json.error)
+                setError(json.error)
             }
         } else {
-            console.log('error')
-            setMessage('Error creating order')
+            if (!(order.length > 0)) {
+                setError('Your cart is empty!')
+            }
+            if (!chosenHospital) {
+                setError('You have not selected any hospitals!')
+            }
         }
     }
 
@@ -136,6 +141,7 @@ const Order = ({ user, loggedIn }) => {
                     </table>
                     <button onClick={handleSubmit}>Submit</button>
                     <p>{message}</p>
+                    <p>{error}</p>
                 </div>
             }
         </div >
