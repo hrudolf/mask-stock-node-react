@@ -1,6 +1,12 @@
 const Home = () => {
     return (
-        <h1>Home</h1>
+        <div>
+            <h1 className="HomeText">Elon's Mask Stock</h1>
+            <div className="ElonImg">
+                <img src="./Elon.png" alt="Elon"></img>
+            </div>
+        </div>
+
     );
 }
 
