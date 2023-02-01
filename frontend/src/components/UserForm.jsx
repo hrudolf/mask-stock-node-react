@@ -38,6 +38,7 @@ const UserForm = ({ user, setUser }) => {
   const sendUserData = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setMessage('');
     setError('');
     const url = user ? `/updateuser/${user._id}` : '/register';
     const fetchMethod = user ? 'PATCH' : 'POST';
