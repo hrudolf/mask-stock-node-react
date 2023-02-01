@@ -42,6 +42,9 @@ orderSchema.statics.addOrder = async function ({ user, hospital, goods }) {
     const goodsWithPrice = await Promise.all(goods.map(async (good) => {
         const itemInStock = await Stock.findById(good.item);
         //Update stock
+        if (itemInStock.quantity < good.quantity) {
+            throw Error('Not enough available items')
+        }
         itemInStock.quantity -= good.quantity;
         itemInStock.save();
         good.price = itemInStock.sellPrice;
