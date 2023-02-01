@@ -32,7 +32,7 @@ router.get('/users', async (req, res) => {
 router.get('/users/:id', async (req, res) => {
     const _id = req.params.id;
     try {
-        const users = await UserModel.findById(_id);
+        const users = await UserModel.findById(_id).populate("hospitals");
 
         res.status(200).json(users)
 
