@@ -91,9 +91,15 @@ userSchema.statics.findAndUpdate = async function ({ id, name, username, passwor
         if (!validator.isStrongPassword(password)) {
             throw Error('Password is too weak')
         }
+
         //password hashing
         const hash = await bcrypt.hash(password, 10);
         const user = await this.findByIdAndUpdate(id, { name, username, password: hash, hospitals });
+
+        if(!user) {
+            throw Error('User not found')
+        }
+
         return user;
     }
     const user = await this.findByIdAndUpdate(id, { name, username, hospitals });
