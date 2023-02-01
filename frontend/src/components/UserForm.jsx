@@ -66,9 +66,11 @@ const UserForm = ({ loggedUser, setLoggedUser }) => {
       setError(json.error);
     }
     else {
-      json.token = loggedUser.token;
-      setLoggedUser(json);
-      localStorage.setItem('user', JSON.stringify(json))
+      if (loggedUser) {
+        json.token = loggedUser.token;
+        setLoggedUser(json);
+        localStorage.setItem('user', JSON.stringify(json))
+      }
       setLoading(false);
       loggedUser ? setMessage("Profile successfully updated") : setMessage("Successful registration, your profile will be validated by an admin");
     }
