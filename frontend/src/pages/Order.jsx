@@ -1,11 +1,60 @@
 import { useEffect, useState } from "react";
-import OrderForm from "../components/OrderForm";
-
 
 const Order = ({ user, loggedIn }) => {
     const [maskStock, setMaskStock] = useState(null)
     const [hospitalList, setHospitalList] = useState(null);
     const [chosenHospital, setChosenHospital] = useState(null);
+    const [order, setOrder] = useState([]);
+    const [message, setMessage] = useState('');
+
+    const handleCheckBox = (hospitalID) => {
+        setChosenHospital(hospitalID)
+    }
+
+    const handleQuantityChange = (e, type) => {
+
+        const filteredOrder = JSON.parse(JSON.stringify(order)).filter(item => item.item !== type._id);
+
+        if (Number(e.target.value) !== 0) {
+
+            const addToOrder = {
+                item: type._id,
+                quantity: e.target.value
+            }
+            filteredOrder.push(addToOrder)
+        }
+        setOrder(filteredOrder)
+    }
+
+    const handleSubmit = async () => {
+
+        console.log(order)
+
+        if (chosenHospital && user && order.length > 0) {
+            const newOrder = {
+                user: user._id,
+                hospital: chosenHospital,
+                goods: order
+            }
+            const response = await fetch("/api/order", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newOrder)
+            })
+            const json = await response.json()
+            if (response.ok){
+                setMessage('Order succesfully created!')
+            } else {
+                console.log(json)
+                setMessage(json.error)
+            }
+        } else {
+            console.log('error')
+            setMessage('Error creating order')
+        }
+    }
 
     useEffect(() => {
         const controller = new AbortController();
@@ -52,12 +101,12 @@ const Order = ({ user, loggedIn }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {hospitalList &&
+                            {hospitalList && user &&
                                 hospitalList.filter(hosp => user.hospitals.includes(hosp._id)).map(hosp =>
                                     <tr key={hosp._id}>
                                         <td>{hosp.name}</td>
                                         <td>
-                                            <input type="checkbox" onChange={() => setChosenHospital(hosp._id)}/>
+                                            <input type="radio" name="checked" defaultChecked={false} onChange={() => handleCheckBox(hosp._id)} />
                                         </td>
                                     </tr>
                                 )
@@ -79,12 +128,14 @@ const Order = ({ user, loggedIn }) => {
                                     <td key={type.item}>{type.item}</td>
                                     <td>{type.quantity} pcs</td>
                                     <td>
-                                        <input type="number" />
+                                        <input type="number" onChange={(e) => handleQuantityChange(e, type)} />
                                     </td>
                                 </tr>
                             )}
                         </tbody>
                     </table>
+                    <button onClick={handleSubmit}>Submit</button>
+                    <p>{message}</p>
                 </div>
             }
         </div >
