@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import OrderForm from "../components/OrderForm";
-
 
 const Order = ({ user, loggedIn }) => {
     const [maskStock, setMaskStock] = useState(null)
     const [hospitalList, setHospitalList] = useState(null);
     const [chosenHospital, setChosenHospital] = useState(null)
+
+    const handleSubmit = () => {
+        console.log('submit gomb')
+    }
 
     useEffect(() => {
         const controller = new AbortController();
@@ -86,6 +88,7 @@ const Order = ({ user, loggedIn }) => {
                             )}
                         </tbody>
                     </table>
+                    <button onClick={handleSubmit}>Submit</button>
                 </div>
             }
         </div >
