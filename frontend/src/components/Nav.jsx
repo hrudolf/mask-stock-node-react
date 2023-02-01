@@ -18,7 +18,7 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
                     </span>
                     <button onClick={() => {
                         setLoggedIn(false);
-                        setLoggedUser({});
+                        setLoggedUser('');
                         localStorage.removeItem('user');
                     }}>Log out</button>
                 </>

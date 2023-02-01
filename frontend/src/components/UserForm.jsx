@@ -3,15 +3,17 @@ import { useNavigate } from "react-router";
 import Checkbox from "./Checkbox";
 import "./UserForm.css";
 
-const UserForm = ({ user }) => {
-  const [fullname, setFullname] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const UserForm = ({ user, setUser }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
-  const [hospitalList, setHospitalList] = useState('');
+
+  const [fullname, setFullname] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [usersHospitals, setUsersHospitals] = useState('')
+
+  const [hospitalList, setHospitalList] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,21 +25,12 @@ const UserForm = ({ user }) => {
         })
         .catch(err => setError(err.message))
     }
-    const fetchUser = async () => {
-      fetch(`/api/users/${user._id}`)
-        .then(res => res.json())
-        .then(json => {
-          console.log(json);
-          setFullname(json.name);
-          setUsername(json.username);
-          setUsersHospitals(json.hospitals);
-        })
-        .catch(err => setError(err.message))
-    }
     //If we have a user, we need the list of hospitals, so we fetch it and set it
     if (user) {
       fetchHospitals();
-      fetchUser();
+      setFullname(user.name);
+      setUsername(user.username);
+      setUsersHospitals(user.hospitals);
     }
 
   }, [user]);
@@ -62,6 +55,7 @@ const UserForm = ({ user }) => {
       setError(json.error);
     }
     else {
+      if (user) setUser({_id: user._id, ...regContent, hospitals: usersHospitals })
       setLoading(false);
       user ? setMessage("Profile successfully updated") : setMessage("Successful registration, your profile will be validated by an admin");
     }
@@ -70,7 +64,7 @@ const UserForm = ({ user }) => {
   return (
     <div>
       {/* We only have a message after successful registration, profile update, so we no longer need the form */}
-      <form className={message ? "UserForm invisible" : "UserForm"}>
+      <form className="UserForm">
         <div className="control">
           <label htmlFor="name">Name:</label>
           <input
@@ -106,12 +100,12 @@ const UserForm = ({ user }) => {
         </div>
 
         {hospitalList && <div className="hospitals">
-          {hospitalList.map(hospital => <Checkbox hospital={hospital} usersHospitals={usersHospitals} setUsersHospitals={setUsersHospitals} key={hospital._id} />)}
+          {hospitalList.map(hospital => <Checkbox hospital={hospital} usersHospitals={usersHospitals} setUsersHospitals={setUsersHospitals} key={hospital._id} setUser />)}
         </div>}
 
         <div className="buttons">
           <button type="submit" disabled={loading} onClick={sendUserData}>
-            {user ? "Update User" : "Create User"}
+            {user ? "Update data" : "Register"}
           </button>
 
           <button type="button" onClick={() => navigate('/')}>
