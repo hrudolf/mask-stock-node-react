@@ -36,7 +36,7 @@ const AdminSite = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {userList.map(user => <AdminUserList user={user} />)}
+                    {userList.map(user => <AdminUserList user={user} key={user._id}/>)}
                 </tbody>
             </table>}
         </div>
