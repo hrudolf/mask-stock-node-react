@@ -6,19 +6,20 @@ import Home from "./pages/Home";
 import UserForm from "./components/UserForm";
 import AdminSite from "./pages/AdminSite";
 import Order from "./pages/Order";
+import Login from "./pages/Login";
 
 function App() {
-  /*   const [loggedIn, setLoggedIn] = useState(false);
-    const [loggedUser, setLoggedUser] = useState(''); */
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedUser, setLoggedUser] = useState(''); 
 
-  const [loggedIn, setLoggedIn] = useState(true);
-  const [loggedUser, setLoggedUser] = useState({
-    _id: "63d92641502713d5846282fe",
-    name: "Doctor House",
-    username: "house",
-    hospitals: ["63d7de20e22bca2c9ef5b242", "63d7de20e22bca2c9ef5b24a"],
-    isAdmin: true
-  });
+  // const [loggedIn, setLoggedIn] = useState(true);
+  // const [loggedUser, setLoggedUser] = useState({
+  //   _id: "63d92641502713d5846282fe",
+  //   name: "Doctor House",
+  //   username: "house",
+  //   hospitals: ["63d7de20e22bca2c9ef5b242", "63d7de20e22bca2c9ef5b24a"],
+  //   isAdmin: true
+  // });
 
   return (
     <div className="App">
@@ -29,6 +30,7 @@ function App() {
         <Route path="/profile" element={<UserForm user={loggedUser} setUser={setLoggedUser} />}></Route>
         <Route path="/admin" element={loggedUser.isAdmin ? <AdminSite /> : <Navigate to="/" />}></Route>
         <Route path="/order" element={<Order user={loggedUser} loggedIn={loggedIn}/>}></Route>
+        <Route path="/login" element={loggedIn ? <Navigate to="/" /> : <Login setLoggedIn={setLoggedIn} setLoggedUser={setLoggedUser}/>}></Route>
       </Routes>
     </div>
   );
