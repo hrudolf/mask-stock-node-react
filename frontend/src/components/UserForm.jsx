@@ -17,7 +17,7 @@ const UserForm = ({ user, setUser }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchHospitals = async () => {
+    const fetchHospitals = () => {
       fetch("/api/hospitals")
         .then(res => res.json())
         .then(json => {
@@ -57,7 +57,7 @@ const UserForm = ({ user, setUser }) => {
       setError(json.error);
     }
     else {
-      if (user) setUser({_id: user._id, ...regContent, hospitals: usersHospitals })
+      if (user) setUser({ _id: user._id, ...regContent, hospitals: usersHospitals })
       setLoading(false);
       user ? setMessage("Profile successfully updated") : setMessage("Successful registration, your profile will be validated by an admin");
     }
