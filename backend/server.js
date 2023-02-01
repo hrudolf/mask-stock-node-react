@@ -50,6 +50,7 @@ app.patch('/updateuser/:id', async (req, res) => {
     const { name, username, password, hospitals } = req.body;
     try {
         const user = await User.findAndUpdate({id, name, username, password, hospitals});
+        console.log(user)
         //TODO: Add Token
         res.status(200).json(user);
     } catch (error) {

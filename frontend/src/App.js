@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
-import { Routes, Route } from "react-router-dom";
 import UserForm from "./components/UserForm";
+import Order from "./pages/Order";
 
 function App() {
 /*   const [loggedIn, setLoggedIn] = useState(false);
@@ -10,9 +12,9 @@ function App() {
 
     const [loggedIn, setLoggedIn] = useState(true);
     const [loggedUser, setLoggedUser] = useState({
-      _id: "63d81d6668ca1d35a1f81277",
+      _id: "63d92641502713d5846282fe",
       name: "Doctor House",
-      username: "AwesomeUser008",
+      username: "house",
       hospitals: ["63d7de20e22bca2c9ef5b242", "63d7de20e22bca2c9ef5b24a"]
     });
 
@@ -21,10 +23,9 @@ function App() {
       <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
       <Routes>
         <Route path="/" element={<Home user={loggedUser} />}></Route>
-        {/* {/* <Route path="/login" element={<Login user={loggedUser} />}></Route> */}
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/order" element={<Order user={loggedUser} loggedIn={loggedIn}/>}></Route>
+        <Route path="/register" element={<UserForm />}></Route>
         <Route path="/profile" element={<UserForm user={loggedUser} setUser={setLoggedUser}/>}></Route>
+        <Route path="/order" element={<Order user={loggedUser} loggedIn={loggedIn}/>}></Route>
       </Routes>
     </div>
   );

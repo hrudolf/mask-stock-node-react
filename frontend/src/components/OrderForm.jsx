@@ -1,6 +1,6 @@
 const OrderForm = ({ user, loggedIn, maskStock }) => {
 
-    console.log(maskStock)
+    console.log(user)
 
     return (
 
@@ -10,7 +10,30 @@ const OrderForm = ({ user, loggedIn, maskStock }) => {
             }
             {loggedIn &&
                 <div className="masks">
-                    {maskStock && maskStock.map(type => <p key={type.item}>{type.item}</p>)}
+                    <h2 id="availablemasks">Available Masks</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mask Type</th>
+                                <th>Available</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {maskStock && maskStock.map(type =>
+                                <tr>
+                                    <td key={type.item}>{type.item}</td>
+                                    <td>{type.quantity} pcs</td>
+                                </tr>
+
+                            )}
+                        </tbody>
+                    </table>
+                    <h2>Hospitals for user {user.username}</h2>
+                    <ul>
+                        {user.hospitals.map(hospital =>
+                            <li>{hospital}</li>
+                        )}
+                    </ul>
                 </div>
             }
         </div >

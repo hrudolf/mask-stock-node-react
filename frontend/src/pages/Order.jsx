@@ -9,7 +9,8 @@ const Order = ({ user, loggedIn }) => {
 
         fetch("/api/stock").then((res) => res.json())
             .then((res) => {
-                setmaskStock(res.stock);
+                console.log(res)
+                setmaskStock(res);
             })
             .catch((error) => {
                 if (error.name !== "AbortError") {
