@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
+    const navigate = useNavigate();
 
     return (
         <nav>
@@ -23,6 +24,7 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
                             setLoggedIn(false);
                             setLoggedUser('');
                             localStorage.removeItem('user');
+                            navigate('/');
                         }}>Log out</button>
                     </>
                 }
