@@ -10,8 +10,7 @@ const MyOrders = ({ loggedUser }) => {
         setLoading(true);
         let abortController = new AbortController();
         const fetchOrders = async () => {
-            const URL = loggedUser.isAdmin ? `/api/order` : `/api/order?user=${loggedUser._id}`;
-            const response = await fetch(URL, {
+            const response = await fetch(`/api/order`, {
                 signal: abortController.signal,
                 headers: {
                     'Authorization': `Bearer ${loggedUser.token}`
@@ -50,7 +49,8 @@ const MyOrders = ({ loggedUser }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map(order => {
+                        {orders.sort((a,b) => new Date(b.date) - new Date(a.date)).map(order => {
+                            console.log(order);
                             return (
                                 <tr key={order._id}>
                                     <td>{order.user.name}</td>

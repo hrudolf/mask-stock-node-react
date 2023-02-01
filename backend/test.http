@@ -28,6 +28,7 @@ GET http://localhost:3015/api/hospitals
 ###
 //You have to update the User ID up in the link, and below the hospital IDs
 //You can get the IDs from the two GET requests above!
+//ADDED JWT TOKEN, TEST WON'T WORK without it
 PATCH http://localhost:3015/updateuser/63d7de20e22bca2c9ef5b25b
 Content-Type:  application/json
 

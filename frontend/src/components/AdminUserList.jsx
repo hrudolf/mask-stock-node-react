@@ -1,10 +1,11 @@
 import { useState } from "react";
 
-const AdminUserList = ({ user, loggedUser }) => {
+const AdminUserList = ({ user, loggedUser, setError }) => {
     const [verified, setVerified] = useState(user.isVerified);
     const [isAdmin, setIsAdmin] = useState(user.isAdmin);
 
     const changeRights = async (type) => {
+        setError('');
         const response = await fetch(`/api/${type}/${user._id}`, {
             method: 'POST',
             headers: {
@@ -14,7 +15,7 @@ const AdminUserList = ({ user, loggedUser }) => {
 
         const json = await response.json();
         if (!response.ok) {
-            console.log(json.error);
+            setError(json.error);
         } else {
             type === "verifyuser" ? setVerified(!verified) : setIsAdmin(!isAdmin)
         }

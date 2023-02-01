@@ -25,7 +25,6 @@ router.use(async (req, res, next) => {
         next();
 
     } catch (error) {
-        console.log(error);
         res.status(401).json({ error: 'Request is not authorized' });
     }
 })
@@ -43,30 +42,24 @@ router.get('/hospitals', async (req, res) => {
 });
 
 router.get('/users', async (req, res) => {
+    const _id = req.user._id;
     try {
-        const users = await UserModel.find();
+        const user = await UserModel.findById(_id);
 
-        res.status(200).json(users)
+        if (user.isAdmin) {
+            const allUsers = await UserModel.find();
+            return res.status(200).json(allUsers)
+        }
+
+        res.status(200).json(user)
 
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
 });
 
-router.get('/users/:id', async (req, res) => {
-    const _id = req.params.id;
-    try {
-        const users = await UserModel.findById(_id);
-
-        res.status(200).json(users)
-
-    } catch (error) {
-        res.status(500).json({ error: error.message })
-    }
-});
-
-router.patch('/updateuser/:id', async (req, res) => {
-    const id = req.params.id;
+router.patch('/updateuser/', async (req, res) => {
+    const id = req.user._id;
     const { name, username, password, hospitals } = req.body;
     try {
         const user = await UserModel.findAndUpdate({ id, name, username, password, hospitals });
@@ -79,8 +72,13 @@ router.patch('/updateuser/:id', async (req, res) => {
 })
 
 router.post('/verifyuser/:id', async (req, res) => {
+    const adminId = req.user._id;
     const id = req.params.id;
     try {
+        const admin = await UserModel.findById(adminId);
+        if (!admin.isAdmin) {
+            throw Error('Request denied, no admin rights')
+        }
         const user = await UserModel.findById(id);
         user.isVerified = !user.isVerified;
         await user.save();
@@ -92,9 +90,14 @@ router.post('/verifyuser/:id', async (req, res) => {
 })
 
 router.post('/makeadmin/:id', async (req, res) => {
-    const id = req.params.id;
+    const adminId = req.user._id;
+    const userId = req.params.id;
     try {
-        const user = await UserModel.findById(id);
+        const user = await UserModel.findById(userId);
+        const admin = await UserModel.findById(adminId);
+        if (String(admin._id) === String(user._id)) {
+            throw Error('Unable to remove your own right.')
+        }
         user.isAdmin = !user.isAdmin;
         await user.save();
         //TODO: Add Token
@@ -116,9 +119,10 @@ router.get('/stock', async (req, res) => {
 });
 
 router.get('/order', async (req, res) => {
-    const user = req.query.user;
+    const user_id = req.user._id;
     try {
-        const order = await OrderModel.find().populate({
+        const user = await UserModel.findById(user_id);
+        const allOrders = await OrderModel.find().populate({
             path: "user",
             select: "name"
         })
@@ -133,12 +137,17 @@ router.get('/order', async (req, res) => {
                     select: "item"
                 }
             })
-
-        if (user) {
-            const filteredOrder = order.filter(order => order.user._id == user);
+        if (user.isAdmin) {
+            return res.status(200).json(allOrders);
+        }
+        
+        if (user_id) {
+            const filteredOrder = allOrders.filter(order => String(order.user._id) === String(user_id));
             return res.status(200).json(filteredOrder)
         }
-        res.status(200).json(order)
+
+        res.status(500).json({error: 'User not found'})
+
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

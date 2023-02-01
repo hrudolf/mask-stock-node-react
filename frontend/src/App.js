@@ -17,7 +17,7 @@ function App() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     const fetchUser = async () => {
-      const response = await fetch(`/api/users/${user._id}`, {
+      const response = await fetch(`/api/users/`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

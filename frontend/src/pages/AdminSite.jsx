@@ -5,6 +5,7 @@ import AdminUserList from "../components/AdminUserList";
 const AdminSite = ({loggedUser}) => {
     const [userList, setUserList] = useState();
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         let abortController = new AbortController();
@@ -42,9 +43,10 @@ const AdminSite = ({loggedUser}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {userList.map(user => <AdminUserList user={user} key={user._id} loggedUser={loggedUser} />)}
+                    {userList.map(user => <AdminUserList user={user} key={user._id} loggedUser={loggedUser} setError={setError}/>)}
                 </tbody>
             </table>}
+            {error && <div className="error">{error}</div>}
         </div>
     );
 }

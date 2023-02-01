@@ -45,7 +45,7 @@ const UserForm = ({ loggedUser, setLoggedUser }) => {
     setLoading(true);
     setMessage('');
     setError('');
-    const url = loggedUser ? `/api/updateuser/${loggedUser._id}` : '/register';
+    const url = loggedUser ? `/api/updateuser/` : '/register';
     const fetchMethod = loggedUser ? 'PATCH' : 'POST';
     const headers = loggedUser ? {
       "Content-Type": "application/json",

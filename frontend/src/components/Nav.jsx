@@ -7,8 +7,8 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
             <Link to='/'>Home</Link>
             {loggedUser.isAdmin && <Link to='/admin'>Userlist</Link>}
             {loggedUser.isAdmin && <Link to='/myorders'>All Orders</Link>}
-            {!loggedUser.isAdmin && loggedIn && <Link to='/order'>New order</Link>}
-            {!loggedUser.isAdmin && loggedIn && <Link to='/myorders'>Order history</Link>}
+            {loggedIn && <Link to='/order'>New order</Link>}
+            {!loggedUser.isAdmin && loggedIn && <Link to='/myorders'>My orders</Link>}
             <span>
                 {!loggedIn &&
                     <>
