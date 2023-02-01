@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 const validator = require('validator');
+const sendEmail = require('../services/sendEmail')
 
 const userSchema = new Schema({
     username: {
@@ -56,12 +57,12 @@ userSchema.statics.signup = async function (name, username, password, hospitals)
     const user = await this.create({ name, username, password: hash, hospitals })
 
     //sending email to admin
-    /*     sendEmail(email, username, confirmation.code); */
+    sendEmail(user.name);
 
     return user;
 }
 
-//signup
+//login
 userSchema.statics.login = async function (username, password) {
     if (!username || !password) {
         throw Error('Missing data');
@@ -79,12 +80,9 @@ userSchema.statics.login = async function (username, password) {
         throw Error('Incorrect Password');
     }
 
-    /*     if (!user.verified) {
-            throw Error('Please verify your e-mail before logging in.')
-        } */
-
-    //sending email to admin
-    /*     sendEmail(email, username, confirmation.code); */
+    if (!user.isVerified) {
+        throw Error(`Your account has not been verified yet`);
+    }
 
     return user;
 }
@@ -100,7 +98,7 @@ userSchema.statics.findAndUpdate = async function ({ id, name, username, passwor
         const hash = await bcrypt.hash(password, 10);
         const user = await this.findByIdAndUpdate(id, { name, username, password: hash, hospitals });
 
-        if(!user) {
+        if (!user) {
             throw Error('User not found')
         }
 

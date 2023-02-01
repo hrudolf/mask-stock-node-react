@@ -40,7 +40,7 @@ const UserForm = ({ user, setUser }) => {
     setLoading(true);
     setMessage('');
     setError('');
-    const url = user ? `/updateuser/${user._id}` : '/register';
+    const url = user ? `/api/updateuser/${user._id}` : '/register';
     const fetchMethod = user ? 'PATCH' : 'POST';
     const regContent = password ? { name: fullname, username, password } : { name: fullname, username };
     const bodyContent = user ? { ...regContent, hospitals: usersHospitals } : regContent;
@@ -57,7 +57,8 @@ const UserForm = ({ user, setUser }) => {
       setError(json.error);
     }
     else {
-      if (user) setUser({ _id: user._id, ...regContent, hospitals: usersHospitals })
+      setUser(json);
+      localStorage.setItem('user', JSON.stringify(json))
       setLoading(false);
       user ? setMessage("Profile successfully updated") : setMessage("Successful registration, your profile will be validated by an admin");
     }

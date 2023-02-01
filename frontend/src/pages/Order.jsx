@@ -5,11 +5,10 @@ import OrderForm from "../components/OrderForm";
 const Order = ({ user, loggedIn }) => {
     const [maskStock, setMaskStock] = useState(null)
     const [hospitalList, setHospitalList] = useState(null);
-    const [chosenHospital, setChosenHospital] = useState(null)
+    const [chosenHospital, setChosenHospital] = useState(null);
 
     useEffect(() => {
         const controller = new AbortController();
-
         fetch("/api/hospitals")
             .then(res => res.json())
             .then(res => {

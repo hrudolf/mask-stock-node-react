@@ -6,6 +6,11 @@ const port = process.env.PORT;
 const morgan = require('morgan');
 const apiRoutes = require("./routes/api")
 const User = require("./models/UserModel")
+const jwt = require('jsonwebtoken');
+
+const createToken = (_id) => {
+    return jwt.sign({ _id: _id }, process.env.SECRET, { expiresIn: '8h' });
+}
 
 //middleware
 //receive JSON
@@ -44,19 +49,6 @@ app.post('/login', async (req, res) => {
 //ADD TOKEN CHECKING FROM THIS POINT
 
 app.use('/api/', apiRoutes);
-
-app.patch('/updateuser/:id', async (req, res) => {
-    const id = req.params.id;
-    const { name, username, password, hospitals } = req.body;
-    try {
-        const user = await User.findAndUpdate({id, name, username, password, hospitals});
-        console.log(user)
-        //TODO: Add Token
-        res.status(200).json(user);
-    } catch (error) {
-        return res.status(400).json({ error: error.message })
-    }
-})
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {

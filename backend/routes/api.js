@@ -14,7 +14,7 @@ router.get('/hospitals', async (req, res) => {
         res.status(200).json(hospitals)
 
     } catch (error) {
-        res.status(500).json({ error: error })
+        res.status(500).json({ error: error.message })
     }
 });
 
@@ -25,21 +25,34 @@ router.get('/users', async (req, res) => {
         res.status(200).json(users)
 
     } catch (error) {
-        res.status(500).json({ error: error })
+        res.status(500).json({ error: error.message })
     }
 });
 
 router.get('/users/:id', async (req, res) => {
     const _id = req.params.id;
     try {
-        const users = await UserModel.findById(_id).populate("hospitals");
+        const users = await UserModel.findById(_id);
 
         res.status(200).json(users)
 
     } catch (error) {
-        res.status(500).json({ error: error })
+        res.status(500).json({ error: error.message })
     }
 });
+
+router.patch('/updateuser/:id', async (req, res) => {
+    const id = req.params.id;
+    const { name, username, password, hospitals } = req.body;
+    try {
+        const user = await User.findAndUpdate({id, name, username, password, hospitals});
+        const updatedUser = await User.findById(id);
+        //TODO: Add Token
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        return res.status(400).json({ error: error.message })
+    }
+})
 
 router.get('/stock', async (req, res) => {
     try {
@@ -48,7 +61,7 @@ router.get('/stock', async (req, res) => {
         res.status(200).json(stock)
 
     } catch (error) {
-        res.status(500).json({ error: error })
+        res.status(500).json({ error: error.message })
     }
 });
 
@@ -59,7 +72,7 @@ router.get('/order', async (req, res) => {
         res.status(200).json(order)
 
     } catch (error) {
-        res.status(500).json({ error: error })
+        res.status(500).json({ error: error.message })
     }
     //TODO NEED TO ADD BILLINGO INVOICE
 })
@@ -72,7 +85,7 @@ router.post('/order', async (req, res) => {
         res.status(200).json(order)
 
     } catch (error) {
-        res.status(500).json({ error: error })
+        res.status(500).json({ error: error.message })
     }
     //TODO NEED TO ADD BILLINGO INVOICE
 })

@@ -9,17 +9,29 @@ import Order from "./pages/Order";
 import Login from "./pages/Login";
 
 function App() {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [loggedUser, setLoggedUser] = useState(''); 
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedUser, setLoggedUser] = useState('');
 
-    useEffect(()=>{
+  useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    if(user){
-      setLoggedIn(true);
-      setLoggedUser(user);
+
+    const fetchUser = async () => {
+      const response = await fetch(`/api/users/${user._id}`);
+      const updatedUser = await response.json();
+
+      if (response.ok) {
+        setLoggedIn(true);
+        setLoggedUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(user))
+      } else {
+        console.log('Error');
+      }
     }
-    console.log(user);
-    },[])
+
+    if (user) {
+      fetchUser();
+    }
+  }, [])
 
   return (
     <div className="App">
