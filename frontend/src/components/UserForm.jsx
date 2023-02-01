@@ -110,7 +110,7 @@ const UserForm = ({ user, setUser }) => {
 
         <div className="buttons">
           <button type="submit" disabled={loading}>
-            {user ? "Update data" : "Register"}
+            {user ? "Update profile" : "Register"}
           </button>
 
           <button type="button" onClick={() => navigate('/')}>

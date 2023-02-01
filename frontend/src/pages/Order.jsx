@@ -90,9 +90,11 @@ const Order = ({ user, loggedIn }) => {
         return () => controller.abort();
     }, []);
 
-
     return (
-        < div className="orderpage" >
+        <div className="orderpage">
+            {user.hospitals && user.hospitals.length === 0 &&
+                <h2>Please set your hospitals in your user profile</h2>
+            }
             {!loggedIn &&
                 <h2>Please log in first</h2>
             }
@@ -124,6 +126,7 @@ const Order = ({ user, loggedIn }) => {
                             <tr key="maskHead">
                                 <th>Mask Type</th>
                                 <th>Available</th>
+                                <th>Price</th>
                                 <th>Quantity</th>
                             </tr>
                         </thead>
@@ -132,11 +135,13 @@ const Order = ({ user, loggedIn }) => {
                                 <tr key={type.item}>
                                     <td key={type.item}>{type.item}</td>
                                     <td>{type.quantity} pcs</td>
+                                    <td>{type.sellPrice} HUF/pcs</td>
                                     <td>
                                         <input type="number" onChange={(e) => handleQuantityChange(e, type)} />
                                     </td>
                                 </tr>
-                            )}
+                            )
+                            }
                         </tbody>
                     </table>
                     <button onClick={handleSubmit}>Submit</button>
