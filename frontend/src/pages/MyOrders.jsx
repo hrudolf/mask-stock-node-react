@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-const MyOrders = ({ user }) => {
+const MyOrders = ({ loggedUser }) => {
     const [orders, setOrders] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -10,8 +10,13 @@ const MyOrders = ({ user }) => {
         setLoading(true);
         let abortController = new AbortController();
         const fetchOrders = async () => {
-            const URL = user.isAdmin ? `/api/order` : `/api/order?user=${user._id}`;
-            const response = await fetch(URL, { signal: abortController.signal });
+            const URL = loggedUser.isAdmin ? `/api/order` : `/api/order?user=${loggedUser._id}`;
+            const response = await fetch(URL, {
+                signal: abortController.signal,
+                headers: {
+                    'Authorization': `Bearer ${loggedUser.token}`
+                }
+            });
             const json = await response.json();
             if (!response.ok) {
                 setLoading(false);

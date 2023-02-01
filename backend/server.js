@@ -37,10 +37,11 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
-        //TODO: CHECK TOKEN / TOKENLOGIN??
+        //create token
         const user = await User.login(username, password);
+        const token = await createToken(user._id);
         //TODO: Add Token
-        res.status(200).json(user);
+        res.status(200).json({ user, token });
     } catch (error) {
         return res.status(400).json({ error: error.message })
     }

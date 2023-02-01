@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Order = ({ user, loggedIn }) => {
+const Order = ({ loggedUser, loggedIn }) => {
     const [maskStock, setMaskStock] = useState(null)
     const [hospitalList, setHospitalList] = useState(null);
     const [chosenHospital, setChosenHospital] = useState(null);
@@ -32,9 +32,9 @@ const Order = ({ user, loggedIn }) => {
         setError('');
         setMessage('');
 
-        if (chosenHospital && user && order.length > 0) {
+        if (chosenHospital && loggedUser && order.length > 0) {
             const newOrder = {
-                user: user._id,
+                user: loggedUser._id,
                 hospital: chosenHospital,
                 goods: order
             }
@@ -42,6 +42,7 @@ const Order = ({ user, loggedIn }) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${loggedUser.token}`
                 },
                 body: JSON.stringify(newOrder)
             })
@@ -63,7 +64,12 @@ const Order = ({ user, loggedIn }) => {
 
     useEffect(() => {
         const controller = new AbortController();
-        fetch("/api/hospitals")
+        fetch("/api/hospitals", {
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${loggedUser.token}`
+            }
+        })
             .then(res => res.json())
             .then(res => {
                 setHospitalList(res)
@@ -76,7 +82,12 @@ const Order = ({ user, loggedIn }) => {
             });
 
 
-        fetch("/api/stock").then((res) => res.json())
+        fetch("/api/stock", {
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${loggedUser.token}`
+            }
+        }).then((res) => res.json())
             .then((res) => {
                 setMaskStock(res);
             })
@@ -92,7 +103,7 @@ const Order = ({ user, loggedIn }) => {
 
     return (
         <div className="orderpage">
-            {user.hospitals && user.hospitals.length === 0 &&
+            {loggedUser.hospitals && loggedUser.hospitals.length === 0 &&
                 <h2>Please set your hospitals in your user profile</h2>
             }
             {!loggedIn &&
@@ -103,13 +114,13 @@ const Order = ({ user, loggedIn }) => {
                     <table>
                         <thead>
                             <tr key="head">
-                                <th>Hospitals for user {user.username}</th>
+                                <th>Hospitals for user {loggedUser.username}</th>
                                 <th>Select</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {hospitalList && user &&
-                                hospitalList.filter(hosp => user.hospitals.includes(hosp._id)).map(hosp =>
+                            {hospitalList && loggedUser &&
+                                hospitalList.filter(hosp => loggedUser.hospitals.includes(hosp._id)).map(hosp =>
                                     <tr key={hosp._id}>
                                         <td>{hosp.name}</td>
                                         <td>

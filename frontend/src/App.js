@@ -17,15 +17,21 @@ function App() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     const fetchUser = async () => {
-      const response = await fetch(`/api/users/${user._id}`);
-      const updatedUser = await response.json();
+      const response = await fetch(`/api/users/${user._id}`, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      const json = await response.json();
 
       if (response.ok) {
         setLoggedIn(true);
-        setLoggedUser(updatedUser);
-        localStorage.setItem('user', JSON.stringify(user))
+        json.token = user.token;
+        setLoggedUser(json);
+        localStorage.setItem('user', JSON.stringify(json))
       } else {
         console.log('Error');
+        console.log(json.error);
       }
     }
 
@@ -38,13 +44,13 @@ function App() {
     <div className="App">
       <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
       <Routes>
-        <Route path="/" element={<Home user={loggedUser} />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/register" element={<UserForm />}></Route>
-        <Route path="/profile" element={<UserForm user={loggedUser} setUser={setLoggedUser} />}></Route>
-        <Route path="/admin" element={loggedUser.isAdmin ? <AdminSite /> : <Navigate to="/" />}></Route>
-        <Route path="/order" element={<Order user={loggedUser} loggedIn={loggedIn} />}></Route>
+        <Route path="/profile" element={<UserForm loggedUser={loggedUser} setLoggedUser={setLoggedUser} />}></Route>
+        <Route path="/admin" element={loggedUser.isAdmin ? <AdminSite loggedUser={loggedUser} /> : <Navigate to="/" />}></Route>
+        <Route path="/order" element={loggedIn ? <Order loggedUser={loggedUser} loggedIn={loggedIn} /> : <Navigate to="/" />}></Route>
         <Route path="/login" element={loggedIn ? <Navigate to="/" /> : <Login setLoggedIn={setLoggedIn} setLoggedUser={setLoggedUser} />}></Route>
-        <Route path="/myorders" element={<MyOrders user={loggedUser} />}></Route>
+        <Route path="/myorders" element={loggedIn ? <MyOrders loggedUser={loggedUser} /> : <Navigate to="/" />}></Route>
       </Routes>
     </div>
   );

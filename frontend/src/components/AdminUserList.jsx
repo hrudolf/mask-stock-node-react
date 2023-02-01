@@ -1,12 +1,15 @@
 import { useState } from "react";
 
-const AdminUserList = ({ user }) => {
+const AdminUserList = ({ user, loggedUser }) => {
     const [verified, setVerified] = useState(user.isVerified);
     const [isAdmin, setIsAdmin] = useState(user.isAdmin);
 
     const changeRights = async (type) => {
         const response = await fetch(`/api/${type}/${user._id}`, {
-            method: 'POST'
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${loggedUser.token}`
+            }
         })
 
         const json = await response.json();

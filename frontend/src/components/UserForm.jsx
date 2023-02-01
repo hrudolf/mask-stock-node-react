@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import Checkbox from "./Checkbox";
 import "./UserForm.css";
 
-const UserForm = ({ user, setUser }) => {
+const UserForm = ({ loggedUser, setLoggedUser }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
@@ -18,7 +18,12 @@ const UserForm = ({ user, setUser }) => {
 
   useEffect(() => {
     const fetchHospitals = () => {
-      fetch("/api/hospitals")
+      fetch("/api/hospitals", {
+        method: "GET",
+        headers: {
+          'Authorization': `Bearer ${loggedUser.token}`
+        }
+      })
         .then(res => res.json())
         .then(json => {
           setHospitalList(json)
@@ -26,29 +31,33 @@ const UserForm = ({ user, setUser }) => {
         .catch(err => setError(err.message))
     }
     //If we have a user, we need the list of hospitals, so we fetch it and set it
-    if (user) {
+    if (loggedUser) {
       fetchHospitals();
-      setFullname(user.name);
-      setUsername(user.username);
-      setUsersHospitals(user.hospitals);
+      setFullname(loggedUser.name);
+      setUsername(loggedUser.username);
+      setUsersHospitals(loggedUser.hospitals);
     }
 
-  }, [user]);
+  }, [loggedUser]);
 
   const sendUserData = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
     setError('');
-    const url = user ? `/api/updateuser/${user._id}` : '/register';
-    const fetchMethod = user ? 'PATCH' : 'POST';
+    const url = loggedUser ? `/api/updateuser/${loggedUser._id}` : '/register';
+    const fetchMethod = loggedUser ? 'PATCH' : 'POST';
+    const headers = loggedUser ? {
+      "Content-Type": "application/json",
+      'Authorization': `Bearer ${loggedUser.token}`
+    } : {
+      "Content-Type": "application/json",
+    }
     const regContent = password ? { name: fullname, username, password } : { name: fullname, username };
-    const bodyContent = user ? { ...regContent, hospitals: usersHospitals } : regContent;
+    const bodyContent = loggedUser ? { ...regContent, hospitals: usersHospitals } : regContent;
     const response = await fetch(url, {
       method: fetchMethod,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: headers,
       body: JSON.stringify(bodyContent),
     })
     const json = await response.json()
@@ -57,10 +66,11 @@ const UserForm = ({ user, setUser }) => {
       setError(json.error);
     }
     else {
-      setUser(json);
+      json.token = loggedUser.token;
+      setLoggedUser(json);
       localStorage.setItem('user', JSON.stringify(json))
       setLoading(false);
-      user ? setMessage("Profile successfully updated") : setMessage("Successful registration, your profile will be validated by an admin");
+      loggedUser ? setMessage("Profile successfully updated") : setMessage("Successful registration, your profile will be validated by an admin");
     }
   };
 
@@ -110,7 +120,7 @@ const UserForm = ({ user, setUser }) => {
 
         <div className="buttons">
           <button type="submit" disabled={loading}>
-            {user ? "Update profile" : "Register"}
+            {loggedUser ? "Update profile" : "Register"}
           </button>
 
           <button type="button" onClick={() => navigate('/')}>

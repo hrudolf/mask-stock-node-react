@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import AdminUserList from "../components/AdminUserList";
 
-const AdminSite = () => {
+const AdminSite = ({loggedUser}) => {
     const [userList, setUserList] = useState();
     const [loading, setLoading] = useState(false);
 
@@ -10,7 +10,13 @@ const AdminSite = () => {
         let abortController = new AbortController();
         setLoading(true);
         const fetchUsers = async () => {
-            const response = await fetch('/api/users', { signal: abortController.signal });
+            const response = await fetch('/api/users', {
+                signal: abortController.signal,
+                headers: {
+                    'Authorization': `Bearer ${loggedUser.token}`
+                }
+
+            });
             const json = await response.json();
             setLoading(false);
             setUserList(json);
@@ -36,7 +42,7 @@ const AdminSite = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {userList.map(user => <AdminUserList user={user} key={user._id}/>)}
+                    {userList.map(user => <AdminUserList user={user} key={user._id} loggedUser={loggedUser} />)}
                 </tbody>
             </table>}
         </div>
