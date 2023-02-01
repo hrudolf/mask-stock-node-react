@@ -29,8 +29,8 @@ function App() {
         <Route path="/register" element={<UserForm />}></Route>
         <Route path="/profile" element={<UserForm user={loggedUser} setUser={setLoggedUser} />}></Route>
         <Route path="/admin" element={loggedUser.isAdmin ? <AdminSite /> : <Navigate to="/" />}></Route>
-        <Route path="/order" element={<Order user={loggedUser} loggedIn={loggedIn}/>}></Route>
-        <Route path="/login" element={loggedIn ? <Navigate to="/" /> : <Login setLoggedIn={setLoggedIn} setLoggedUser={setLoggedUser}/>}></Route>
+        <Route path="/order" element={<Order user={loggedUser} loggedIn={loggedIn} />}></Route>
+        <Route path="/login" element={loggedIn ? <Navigate to="/" /> : <Login setLoggedIn={setLoggedIn} setLoggedUser={setLoggedUser} />}></Route>
       </Routes>
     </div>
   );

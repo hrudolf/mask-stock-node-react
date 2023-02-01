@@ -1,6 +1,4 @@
-const OrderForm = ({ user, loggedIn, maskStock }) => {
-
-    console.log(user)
+const OrderForm = ({ user, loggedIn, maskStock, hospitalList }) => {
 
     return (
 
@@ -10,30 +8,47 @@ const OrderForm = ({ user, loggedIn, maskStock }) => {
             }
             {loggedIn &&
                 <div className="masks">
+                    <table>
+                        <thead>
+                            <tr key="head">
+                                <th>Hospitals for user {user.username}</th>
+                                <th>Select</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {hospitalList &&
+                                hospitalList.filter(hosp => user.hospitals.includes(hosp._id)).map(hosp =>
+                                    <tr key={hosp._id}>
+                                        <td>{hosp.name}</td>
+                                        <td>
+                                            <input type="checkbox" />
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
                     <h2 id="availablemasks">Available Masks</h2>
                     <table>
                         <thead>
-                            <tr>
+                            <tr key="maskHead">
                                 <th>Mask Type</th>
                                 <th>Available</th>
+                                <th>Quantity</th>
                             </tr>
                         </thead>
                         <tbody>
                             {maskStock && maskStock.map(type =>
-                                <tr>
+                                <tr key={type.item}>
                                     <td key={type.item}>{type.item}</td>
                                     <td>{type.quantity} pcs</td>
+                                    <td>
+                                        <input type="number" />
+                                    </td>
                                 </tr>
-
                             )}
                         </tbody>
                     </table>
-                    <h2>Hospitals for user {user.username}</h2>
-                    <ul>
-                        {user.hospitals.map(hospital =>
-                            <li>{hospital}</li>
-                        )}
-                    </ul>
                 </div>
             }
         </div >

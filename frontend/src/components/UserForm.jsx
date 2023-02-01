@@ -17,7 +17,7 @@ const UserForm = ({ user, setUser }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchHospitals = async () => {
+    const fetchHospitals = () => {
       fetch("/api/hospitals")
         .then(res => res.json())
         .then(json => {
