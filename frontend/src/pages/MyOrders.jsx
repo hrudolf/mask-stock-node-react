@@ -50,7 +50,6 @@ const MyOrders = ({ loggedUser }) => {
                     </thead>
                     <tbody>
                         {orders.sort((a,b) => new Date(b.date) - new Date(a.date)).map(order => {
-                            console.log(order);
                             return (
                                 <tr key={order._id}>
                                     <td>{order.user.name}</td>
