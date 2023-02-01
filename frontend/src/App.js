@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Nav from "./components/Nav";
@@ -12,14 +12,14 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [loggedUser, setLoggedUser] = useState(''); 
 
-  // const [loggedIn, setLoggedIn] = useState(true);
-  // const [loggedUser, setLoggedUser] = useState({
-  //   _id: "63d92641502713d5846282fe",
-  //   name: "Doctor House",
-  //   username: "house",
-  //   hospitals: ["63d7de20e22bca2c9ef5b242", "63d7de20e22bca2c9ef5b24a"],
-  //   isAdmin: true
-  // });
+    useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem("user"));
+    if(user){
+      setLoggedIn(true);
+      setLoggedUser(user);
+    }
+    console.log(user);
+    },[])
 
   return (
     <div className="App">
@@ -29,8 +29,8 @@ function App() {
         <Route path="/register" element={<UserForm />}></Route>
         <Route path="/profile" element={<UserForm user={loggedUser} setUser={setLoggedUser} />}></Route>
         <Route path="/admin" element={loggedUser.isAdmin ? <AdminSite /> : <Navigate to="/" />}></Route>
-        <Route path="/order" element={<Order user={loggedUser} loggedIn={loggedIn}/>}></Route>
-        <Route path="/login" element={loggedIn ? <Navigate to="/" /> : <Login setLoggedIn={setLoggedIn} setLoggedUser={setLoggedUser}/>}></Route>
+        <Route path="/order" element={<Order user={loggedUser} loggedIn={loggedIn} />}></Route>
+        <Route path="/login" element={loggedIn ? <Navigate to="/" /> : <Login setLoggedIn={setLoggedIn} setLoggedUser={setLoggedUser} />}></Route>
       </Routes>
     </div>
   );
