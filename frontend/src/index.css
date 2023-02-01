@@ -15,3 +15,7 @@ code {
 nav a {
   padding: 10px;
 }
+
+.invisible {
+  visibility: hidden;
+}
