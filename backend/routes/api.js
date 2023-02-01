@@ -45,7 +45,7 @@ router.patch('/updateuser/:id', async (req, res) => {
     const id = req.params.id;
     const { name, username, password, hospitals } = req.body;
     try {
-        const user = await UserModel.findAndUpdate({id, name, username, password, hospitals});
+        const user = await UserModel.findAndUpdate({ id, name, username, password, hospitals });
         const updatedUser = await UserModel.findById(id);
         //TODO: Add Token
         res.status(200).json(updatedUser);
@@ -92,11 +92,29 @@ router.get('/stock', async (req, res) => {
 });
 
 router.get('/order', async (req, res) => {
+    const user = req.query.user;
     try {
-        const order = await OrderModel.find().populate({ path: "user", select: ["name"] }).populate({ path: "hospital", select: ["name"] });
+        const order = await OrderModel.find().populate({
+            path: "user",
+            select: "name"
+        })
+            .populate({
+                path: "hospital",
+                select: "name-_id"
+            })
+            .populate({
+                path: "goods",
+                populate: {
+                    path: "item",
+                    select: "item"
+                }
+            })
 
+        if (user) {
+            const filteredOrder = order.filter(order => order.user._id == user);
+            return res.status(200).json(filteredOrder)
+        }
         res.status(200).json(order)
-
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

@@ -7,6 +7,7 @@ import UserForm from "./components/UserForm";
 import AdminSite from "./pages/AdminSite";
 import Order from "./pages/Order";
 import Login from "./pages/Login";
+import MyOrders from "./pages/MyOrders";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -43,6 +44,7 @@ function App() {
         <Route path="/admin" element={loggedUser.isAdmin ? <AdminSite /> : <Navigate to="/" />}></Route>
         <Route path="/order" element={<Order user={loggedUser} loggedIn={loggedIn} />}></Route>
         <Route path="/login" element={loggedIn ? <Navigate to="/" /> : <Login setLoggedIn={setLoggedIn} setLoggedUser={setLoggedUser} />}></Route>
+        <Route path="/myorders" element={<MyOrders user={loggedUser} />}></Route>
       </Routes>
     </div>
   );

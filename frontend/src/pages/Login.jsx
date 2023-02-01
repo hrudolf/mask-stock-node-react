@@ -27,7 +27,6 @@ const Login = ({setLoggedIn, setLoggedUser}) => {
       setLoggedIn(true);
       setLoggedUser(user);
       localStorage.setItem("user",JSON.stringify(user));
-      console.log("Did it", user);
     }
     }
 
