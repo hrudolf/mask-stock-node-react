@@ -21,7 +21,6 @@ const MyOrders = ({ loggedUser }) => {
                 setLoading(false);
                 setError(json.error)
             } else {
-                console.log(json);
                 setLoading(false);
                 setOrders(json);
             }
