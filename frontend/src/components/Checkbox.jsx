@@ -16,7 +16,7 @@ const Checkbox = ({ hospital, usersHospitals, setUsersHospitals }) => {
 
     return (
         <div>
-            <input type="checkbox" name={hospital.name} id={hospital._id} checked={checked} onChange={handleChange} />
+            <input className={"checkmark"} type="checkbox" name={hospital.name} id={hospital._id} checked={checked} onChange={handleChange} />
             <label htmlFor={hospital._id}>{hospital.name}</label>
         </div>
     );

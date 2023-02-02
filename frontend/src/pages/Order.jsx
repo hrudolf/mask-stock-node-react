@@ -126,7 +126,7 @@ const Order = ({ loggedUser, loggedIn }) => {
                                     <tr key={hosp._id}>
                                         <td>{hosp.name}</td>
                                         <td>
-                                            <input type="radio" name="checked" defaultChecked={false} onChange={() => handleCheckBox(hosp._id)} />
+                                            <input type="radio" className={"radioButton"} name="checked" defaultChecked={false} onChange={() => handleCheckBox(hosp._id)} />
                                         </td>
                                     </tr>
                                 )

@@ -35,7 +35,7 @@ nav a:hover {
   text-align: center;
   position: relative;
   top: 16vh;
-  font-size: 9vw;
+  font-size: 5rem;
   font-family: 'Kanit', sans-serif;
 }
 
@@ -60,6 +60,10 @@ nav {
   justify-content: left;
   position: absolute;
   right: 0px;
+  padding: 10px;
+}
+
+.logButtons span {
   padding: 10px;
 }
 
@@ -129,6 +133,7 @@ table td, table th {
   min-width: 25%;
   border-radius: 8px;
   margin: 10px;
+  font-weight: 700;
 }
 
 .control {
@@ -148,4 +153,17 @@ input {
   border: none;
   border-radius: 5px;
   font-size: 1.05em;
+}
+
+.checkmark, .radioButton {
+  height: 15px;
+  width: 15px;
+}
+
+.hospitals div {
+  margin-top: 1px;
+}
+
+.hospitals div:hover {
+  color: rgb(175, 216, 255);
 }
