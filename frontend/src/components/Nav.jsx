@@ -6,7 +6,7 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
     return (
         <nav>
             <Link to='/'>Home</Link>
-            {loggedUser.isAdmin && <Link to='/admin'>Userlist</Link>}
+            {loggedUser.isAdmin && <Link to='/admin'>Admin Page</Link>}
             {loggedUser.isAdmin && <Link to='/myorders'>All Orders</Link>}
             {loggedIn && <Link to='/order'>New order</Link>}
             {!loggedUser.isAdmin && loggedIn && <Link to='/myorders'>My orders</Link>}
