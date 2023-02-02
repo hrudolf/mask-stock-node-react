@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
 
-
-
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -15,10 +12,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   scroll-behavior: smooth;
-
 }
-
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -27,9 +21,17 @@ code {
 
 nav a {
   padding: 10px;
+  text-decoration: none;
+  height: auto;
 }
 
-.HomeText{
+nav a:hover {
+  padding: 10px;
+  text-decoration: none;
+  background-color: lightblue;
+}
+
+.HomeText {
   text-align: center;
   position: relative;
   top: 16vh;
@@ -37,15 +39,26 @@ nav a {
   font-family: 'Kanit', sans-serif;
 }
 
-.ElonImg{
+.ElonImg {
   position: fixed;
   right: -4vh;
   bottom: 0vh;
 }
 
-nav{
-  text-align: center;
+nav {
+  display: flex;
   position: relative;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  font-family: 'Kanit', sans-serif;
+  font-size: 1.2em;
+  height: 70px;
+  padding: 5px;
+}
 
+.logButtons {
+  justify-content: left;
+  position: absolute;
+  right: 0px;
+  padding: 10px;
 }

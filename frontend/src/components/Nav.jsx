@@ -10,7 +10,7 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
             {loggedUser.isAdmin && <Link to='/myorders'>All Orders</Link>}
             {loggedIn && <Link to='/order'>New order</Link>}
             {!loggedUser.isAdmin && loggedIn && <Link to='/myorders'>My orders</Link>}
-            <span>
+            <div className='logButtons'>
                 {!loggedIn &&
                     <>
                         <Link to='/register'>Sign up</Link>
@@ -18,17 +18,17 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
                     </>}
                 {loggedIn &&
                     <>
-                        {`${loggedUser.username}`}
+                        <span>{`${loggedUser.username}`}</span>
                         <Link to='/profile'>User profile</Link>
-                        <button onClick={() => {
+                        <span onClick={() => {
                             setLoggedIn(false);
                             setLoggedUser('');
                             localStorage.removeItem('user');
                             navigate('/');
-                        }}>Log out</button>
+                        }}>Log out</span>
                     </>
                 }
-            </span>
+            </div>
         </nav>
     );
 }
