@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 
 const sendEmail = (regName) => {
 
-    const message = `<p>Dear Admin, a new user (${regName}) has registered to the site.</p>`
+    const message = `<p>Dear Admin, a new user (${regName}) has registered to the site. Please verify them.</p>`
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',

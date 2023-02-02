@@ -65,7 +65,6 @@ router.patch('/updateuser/', async (req, res) => {
     try {
         const user = await UserModel.findAndUpdate({ id, name, username, password, hospitals });
         const updatedUser = await UserModel.findById(id);
-        //TODO: Add Token
         res.status(200).json(updatedUser);
     } catch (error) {
         return res.status(400).json({ error: error.message })
@@ -83,7 +82,6 @@ router.post('/verifyuser/:id', async (req, res) => {
         const user = await UserModel.findById(id);
         user.isVerified = !user.isVerified;
         await user.save();
-        //TODO: Add Token
         res.status(200).json(user);
     } catch (error) {
         return res.status(400).json({ error: error.message })
@@ -101,7 +99,6 @@ router.post('/makeadmin/:id', async (req, res) => {
         }
         user.isAdmin = !user.isAdmin;
         await user.save();
-        //TODO: Add Token
         res.status(200).json(user);
     } catch (error) {
         return res.status(400).json({ error: error.message })
@@ -152,7 +149,6 @@ router.get('/order', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
-    //TODO NEED TO ADD BILLINGO INVOICE
 })
 
 router.post('/order', async (req, res) => {
@@ -168,7 +164,6 @@ router.post('/order', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
-    //TODO NEED TO ADD BILLINGO INVOICE
 })
 
 module.exports = router;
