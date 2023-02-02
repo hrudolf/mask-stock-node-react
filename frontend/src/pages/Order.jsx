@@ -100,7 +100,7 @@ const Order = ({ loggedUser, loggedIn }) => {
             });
 
         return () => controller.abort();
-    }, []);
+    }, [loggedUser.token]);
 
     return (
         <div className="orderpage">

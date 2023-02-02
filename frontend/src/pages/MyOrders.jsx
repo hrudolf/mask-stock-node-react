@@ -31,7 +31,7 @@ const MyOrders = ({ loggedUser }) => {
         return () => {
             abortController.abort();
         }
-    }, [])
+    }, [loggedUser.token])
 
     return (
         <div>

@@ -27,7 +27,7 @@ const AdminSite = ({loggedUser}) => {
         return () => {
             abortController.abort();
         }
-    }, [])
+    }, [loggedUser.token])
 
     return (
         <div className="admin">
