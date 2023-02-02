@@ -20,7 +20,7 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
                     <>
                         <span>{`${loggedUser.username}`}</span>
                         <Link to='/profile'>User profile</Link>
-                        <span onClick={() => {
+                        <span className={"logout"} onClick={() => {
                             setLoggedIn(false);
                             setLoggedUser('');
                             localStorage.removeItem('user');

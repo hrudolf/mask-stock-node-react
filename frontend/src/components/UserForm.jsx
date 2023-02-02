@@ -77,7 +77,7 @@ const UserForm = ({ loggedUser, setLoggedUser }) => {
   };
 
   return (
-    <div>
+    <div className={"orderpage"}>
       {/* We only have a message after successful registration, profile update, so we no longer need the form */}
       <form className="UserForm" onSubmit={sendUserData}>
         <div className="control">
@@ -130,8 +130,8 @@ const UserForm = ({ loggedUser, setLoggedUser }) => {
           </button>
         </div>
       </form>
-      <div style={{ color: "red" }}>{error ? error : ""}</div>
-      <div style={{ color: "green" }}>{message ? message : ""}</div>
+      {error && <div className={"error"}>{error ? error : ""}</div>}
+      {message && <div className={"message"}>{message ? message : ""}</div>}
     </div >
   );
 };

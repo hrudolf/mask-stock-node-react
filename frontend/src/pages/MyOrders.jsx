@@ -33,7 +33,7 @@ const MyOrders = ({ loggedUser }) => {
     }, [loggedUser.token])
 
     return (
-        <div>
+        <div className={"orderpage"}>
             <h1>My orders</h1>
             {error && <p>{error}</p>}
             {loading && <p>Loading...</p>}

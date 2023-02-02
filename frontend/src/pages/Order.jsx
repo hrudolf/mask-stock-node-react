@@ -104,6 +104,7 @@ const Order = ({ loggedUser, loggedIn }) => {
 
     return (
         <div className="orderpage">
+            <h1>Place new order</h1>
             {loggedUser.hospitals && loggedUser.hospitals.length === 0 &&
                 <h2>Please set your hospitals in your user profile</h2>
             }

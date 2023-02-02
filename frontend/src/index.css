@@ -62,3 +62,90 @@ nav {
   right: 0px;
   padding: 10px;
 }
+
+.logout:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+button {
+  background-color: rgb(204, 230, 238);
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(222, 247, 255);
+  margin: 5px;
+  font-size: 1.05em;
+  font-weight: 600;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(108, 218, 255);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+button:active {
+  margin-top: 8px;
+  margin-bottom: 2px;
+}
+
+.orderpage {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+table {
+  padding: 10px 0;
+  border-collapse: collapse;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+table td, table th {
+  border-collapse: collapse;
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+
+.message {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.message,
+.error {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  min-width: 25%;
+  border-radius: 8px;
+  margin: 10px;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  font-size: 1.15em;
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+
+input {
+  padding: 10px 8px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.05em;
+}
