@@ -156,7 +156,7 @@ const Order = ({ loggedUser, loggedIn }) => {
                             }
                         </tbody>
                     </table>
-                    <button onClick={handleSubmit}>Submit</button>
+                    <button onClick={handleSubmit}>Place order</button>
                     {message && <div className="message">{message}</div>}
                     {error && <div className="error">{error}</div>}
                 </div>
