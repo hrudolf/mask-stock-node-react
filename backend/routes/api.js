@@ -4,6 +4,7 @@ const StockModel = require("../models/StockModel");
 const UserModel = require("../models/UserModel");
 const OrderModel = require("../models/OrderModel");
 const jwt = require("jsonwebtoken");
+const createInvoice = require('../services/createInvoice');
 
 const router = express.Router();
 
@@ -158,6 +159,9 @@ router.post('/order', async (req, res) => {
     const { user, hospital, goods } = req.body;
     try {
         const order = await OrderModel.addOrder({ user, hospital, goods });
+        
+        //create invoice and send to partner
+        createInvoice({hospital, goods});
 
         res.status(200).json(order)
 

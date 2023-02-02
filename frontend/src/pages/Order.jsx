@@ -20,7 +20,8 @@ const Order = ({ loggedUser, loggedIn }) => {
 
             const addToOrder = {
                 item: type._id,
-                quantity: e.target.value
+                quantity: e.target.value,
+                BID: type.BID
             }
             filteredOrder.push(addToOrder)
         }
@@ -148,7 +149,7 @@ const Order = ({ loggedUser, loggedIn }) => {
                                     <td>{type.quantity} pcs</td>
                                     <td>{type.sellPrice} HUF/pcs</td>
                                     <td>
-                                        <input type="number" onChange={(e) => handleQuantityChange(e, type)} />
+                                        <input type="number" min="0" onChange={(e) => handleQuantityChange(e, type)} />
                                     </td>
                                 </tr>
                             )

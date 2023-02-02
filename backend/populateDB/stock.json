@@ -2,11 +2,13 @@
     {
         "item": "FFP2 Mask",
         "quantity": 5000,
-        "sellPrice": 500
+        "sellPrice": 500,
+        "BID": 12749759
     },
     {
         "item": "KN95 Mask",
         "quantity": 5000,
-        "sellPrice": 450
+        "sellPrice": 450,
+        "BID": 12749766
     }
 ]

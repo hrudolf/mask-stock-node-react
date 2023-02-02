@@ -13,6 +13,9 @@ const stockSchema = new Schema({
     sellPrice: {
         type: Number,
         required: true
+    },
+    BID: {
+        type: Number
     }
 })
 

@@ -10,7 +10,8 @@
         "VAT": {
             "number": "18330247202",
             "rate": 1.27
-        }
+        },
+        "BID": 1769444438
     },
     {
         "name": "Miskolci Semmelweis Ignác Egészségügyi Központ és Egyetemi Oktatókórház",
@@ -23,7 +24,8 @@
         "VAT": {
             "number": "14635306205",
             "rate": 1.27
-        }
+        },
+        "BID": 1769444553
     },
     {
         "name": "Szent Pantaleon Kórház Kht.",
@@ -36,7 +38,8 @@
         "VAT": {
             "number": "15791942207",
             "rate": 1.27
-        }
+        },
+        "BID": 1769444748
     },
     {
         "name": "Markhot Ferenc Oktatókórház és Rendelőintézet",
@@ -49,7 +52,8 @@
         "VAT": {
             "number": "15813839-2-10",
             "rate": 1.27
-        }
+        },
+        "BID": 1769444787
     },
     {
         "name": "Fővárosi Önkormányzat Heim Pál Gyermekkórház",
@@ -62,7 +66,8 @@
         "VAT": {
             "number": "19650397-1-42",
             "rate": 1.27
-        }
+        },
+        "BID": 1769444955
     },
     {
         "name": "The Helios Hospital Berlin-Buch",
@@ -75,7 +80,8 @@
         "VAT": {
             "number": "DE291053519",
             "rate": 1.00
-        }
+        },
+        "BID": 1769445031
     },
     {
         "name": "The University Hospital Duesseldorf",
@@ -88,7 +94,8 @@
         "VAT": {
             "number": "DE119432190",
             "rate": 1.00
-        }
+        },
+        "BID": 1769445093
     },
     {
         "name": "The University Hospital of Ludwig Maximilian University of Munich",
@@ -101,7 +108,8 @@
         "VAT": {
             "number": "DE811205325",
             "rate": 1.00
-        }
+        },
+        "BID": 1769445137
     },
     {
         "name": "Rigas Austrumu Kliniskas Universitates",
@@ -114,7 +122,8 @@
         "VAT": {
             "number": "Not yet found",
             "rate": 1.00
-        }
+        },
+        "BID": 1769445171
     },
     {
         "name": "Karolinska University Hospital",
@@ -127,6 +136,7 @@
         "VAT": {
             "number": "Not yet found",
             "rate": 1.00
-        }
+        },
+        "BID": 1769445212
     }
 ]

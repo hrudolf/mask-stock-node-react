@@ -21,6 +21,7 @@ const MyOrders = ({ loggedUser }) => {
                 setLoading(false);
                 setError(json.error)
             } else {
+                console.log(json);
                 setLoading(false);
                 setOrders(json);
             }
@@ -37,7 +38,7 @@ const MyOrders = ({ loggedUser }) => {
             <h1>My orders</h1>
             {error && <p>{error}</p>}
             {loading && <p>Loading...</p>}
-            {orders &&
+            {orders && orders.length > 0 &&
                 <table>
                     <thead>
                         <tr>

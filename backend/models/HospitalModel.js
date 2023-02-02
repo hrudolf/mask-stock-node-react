@@ -21,6 +21,9 @@ const hospitalSchema = new Schema({
             required: true,
             default: 1.27
         }
+    },
+    BID: {
+        type: Number
     }
 })
 
