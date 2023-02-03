@@ -47,10 +47,10 @@ router.get('/users', async (req, res) => {
     try {
         const user = await UserModel.findById(_id);
 
-        if (user.isAdmin) {
+       /*  if (user.isAdmin) {
             const allUsers = await UserModel.find();
             return res.status(200).json(allUsers)
-        }
+        } */
 
         res.status(200).json(user)
 

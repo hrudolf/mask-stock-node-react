@@ -15,6 +15,7 @@ function App() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
 
     const fetchUser = async () => {
       const response = await fetch(`/api/users/`, {
@@ -28,6 +29,7 @@ function App() {
         setLoggedIn(true);
         json.token = user.token;
         setLoggedUser(json);
+        localStorage.clear();
         localStorage.setItem('user', JSON.stringify(json))
       } else {
         console.log('Error');

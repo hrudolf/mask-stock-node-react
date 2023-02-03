@@ -25,6 +25,7 @@ const Login = ({ setLoggedIn, setLoggedUser }) => {
     else {
       const userWithJWT = json.user;
       userWithJWT.token = json.token;
+      console.log(json.token);
       setLoading(false);
       setLoggedIn(true);
       setLoggedUser(userWithJWT);

@@ -24,6 +24,7 @@ const Nav = ({ loggedIn, setLoggedIn, loggedUser, setLoggedUser }) => {
                             setLoggedIn(false);
                             setLoggedUser('');
                             localStorage.removeItem('user');
+                            localStorage.clear();
                             navigate('/');
                         }}>Log out</span>
                     </>
