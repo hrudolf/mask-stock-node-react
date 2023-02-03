@@ -45,8 +45,8 @@ const UserForm = ({ loggedUser, setLoggedUser }) => {
     setLoading(true);
     setMessage('');
     setError('');
-    const url = loggedUser ? `/api/updateuser/` : '/register';
-    const fetchMethod = loggedUser ? 'PATCH' : 'POST';
+    const url = loggedUser ? `/api/user` : '/register';
+    const fetchMethod = loggedUser ? 'PUT' : 'POST';
     const headers = loggedUser ? {
       "Content-Type": "application/json",
       'Authorization': `Bearer ${loggedUser.token}`

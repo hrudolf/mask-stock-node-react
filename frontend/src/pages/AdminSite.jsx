@@ -12,7 +12,7 @@ const AdminSite = ({loggedUser}) => {
         let abortController = new AbortController();
         setLoading(true);
         const fetchUsers = async () => {
-            const response = await fetch('/api/users/all', {
+            const response = await fetch('/api/users', {
                 signal: abortController.signal,
                 headers: {
                     'Authorization': `Bearer ${loggedUser.token}`

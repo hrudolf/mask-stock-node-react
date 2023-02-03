@@ -18,7 +18,7 @@ function App() {
     console.log(user);
 
     const fetchUser = async () => {
-      const response = await fetch(`/api/users/`, {
+      const response = await fetch(`/api/user`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

@@ -19,6 +19,7 @@ router.use(async (req, res, next) => {
     }
 
     const token = authorization.split(' ')[1];
+    const { uid } = req.body;
 
     try {
         const { _id } = jwt.verify(token, process.env.SECRET);
@@ -42,7 +43,7 @@ router.get('/hospitals', async (req, res) => {
     }
 });
 
-router.get('/users', async (req, res) => {
+router.get('/user', async (req, res) => {
     const _id = req.user._id;
     try {
         const user = await UserModel.findById(_id);
@@ -59,7 +60,19 @@ router.get('/users', async (req, res) => {
     }
 });
 
-router.get('/users/all', async (req, res) => {
+router.put('/user', async (req, res) => {
+    const id = req.user._id;
+    const { name, username, password, hospitals } = req.body;
+    try {
+        const user = await UserModel.findAndUpdate({ id, name, username, password, hospitals });
+        const updatedUser = await UserModel.findById(id);
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        return res.status(400).json({ error: error.message })
+    }
+})
+
+router.get('/users', async (req, res) => {
     const _id = req.user._id;
     try {
         const user = await UserModel.findById(_id);
@@ -75,27 +88,15 @@ router.get('/users/all', async (req, res) => {
     }
 });
 
-router.patch('/updateuser/', async (req, res) => {
-    const id = req.user._id;
-    const { name, username, password, hospitals } = req.body;
-    try {
-        const user = await UserModel.findAndUpdate({ id, name, username, password, hospitals });
-        const updatedUser = await UserModel.findById(id);
-        res.status(200).json(updatedUser);
-    } catch (error) {
-        return res.status(400).json({ error: error.message })
-    }
-})
-
-router.post('/verifyuser/:id', async (req, res) => {
+router.post('/verify', async (req, res) => {
     const adminId = req.user._id;
-    const id = req.params.id;
+    const { uid } = req.body;
     try {
         const admin = await UserModel.findById(adminId);
         if (!admin.isAdmin) {
             throw Error('Request denied, no admin rights')
         }
-        const user = await UserModel.findById(id);
+        const user = await UserModel.findById(uid);
         user.isVerified = !user.isVerified;
         await user.save();
         res.status(200).json(user);
@@ -104,13 +105,13 @@ router.post('/verifyuser/:id', async (req, res) => {
     }
 })
 
-router.post('/makeadmin/:id', async (req, res) => {
+router.post('/makeadmin', async (req, res) => {
     const adminId = req.user._id;
-    const userId = req.params.id;
+    const { uid } = req.body;
     try {
-        const user = await UserModel.findById(userId);
+        const user = await UserModel.findById(uid);
         const admin = await UserModel.findById(adminId);
-        if (String(admin._id) === String(user._id)) {
+        if (String(admin._id) === String(uid)) {
             throw Error('Unable to remove your own right.')
         }
         user.isAdmin = !user.isAdmin;
