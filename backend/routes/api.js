@@ -47,12 +47,28 @@ router.get('/users', async (req, res) => {
     try {
         const user = await UserModel.findById(_id);
 
-       /*  if (user.isAdmin) {
-            const allUsers = await UserModel.find();
-            return res.status(200).json(allUsers)
-        } */
+        /*  if (user.isAdmin) {
+             const allUsers = await UserModel.find();
+             return res.status(200).json(allUsers)
+         } */
 
         res.status(200).json(user)
+
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+});
+
+router.get('/users/all', async (req, res) => {
+    const _id = req.user._id;
+    try {
+        const user = await UserModel.findById(_id);
+        if (user.isAdmin) {
+            const allUsers = await UserModel.find();
+            return res.status(200).json(allUsers)
+        } else {
+            return res.status(400).json({ error: "Not Authorized" })
+        }
 
     } catch (error) {
         res.status(500).json({ error: error.message })
@@ -138,13 +154,13 @@ router.get('/order', async (req, res) => {
         if (user.isAdmin) {
             return res.status(200).json(allOrders);
         }
-        
+
         if (user_id) {
             const filteredOrder = allOrders.filter(order => String(order.user._id) === String(user_id));
             return res.status(200).json(filteredOrder)
         }
 
-        res.status(500).json({error: 'User not found'})
+        res.status(500).json({ error: 'User not found' })
 
     } catch (error) {
         res.status(500).json({ error: error.message })
@@ -155,9 +171,9 @@ router.post('/order', async (req, res) => {
     const { user, hospital, goods } = req.body;
     try {
         const order = await OrderModel.addOrder({ user, hospital, goods });
-        
+
         //create invoice and send to partner
-        createInvoice({hospital, goods});
+        createInvoice({ hospital, goods });
 
         res.status(200).json(order)
 
