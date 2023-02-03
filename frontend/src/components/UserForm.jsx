@@ -107,8 +107,7 @@ const UserForm = ({ loggedUser, setLoggedUser }) => {
         <div className="control">
           <label htmlFor="password">Password:</label>
           <input
-            type="text"
-            //type="password"
+            type="password"
             name="password"
             id="password"
             value={password}
