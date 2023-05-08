@@ -6,9 +6,10 @@ As a wrap-up project in Codecool's second module "Web", our task was to build a 
 
 ## Tech stack
 
-- React JS, Node JS, Express JS
+- Node JS, Express JS
 - MongooseJS
 - store data with mongoDB
+- React JS, CSS
 - connect to an API on the server side (fetch GET/POST)
 
 ## Functionality
@@ -25,3 +26,7 @@ As a wrap-up project in Codecool's second module "Web", our task was to build a 
 - order page,
 - order history page (users see their own, admin sees all),
 - automatic invoice generation and sending using Billingo API (fetch from backend).
+
+## Extra
+
+I have deployed this project to https://kriptoalapok.hu/ilonmask/ to share it with anyone curious.
